@@ -48,7 +48,7 @@ describe("GET /items", function() {
 });
   // end
 
-/** POST /items - create item from data*/
+/** POST /items - create item from data */
 
 describe("POST /items", function() {
     test("Creates a new item", async function() {
@@ -91,3 +91,16 @@ describe("PATCH /items/:name", function() {
     });
   });
   // end
+
+/** DELETE /items/[name] - delete doritos snack,
+ *  return `{message: "Deleted"}` */
+
+describe("DELETE /items/:name", function() {
+    test("Deletes a single item", async function() {
+      const resp = await request(app).delete(`/items/${doritos.name}`);
+      expect(resp.statusCode).toBe(200);
+      expect(resp.body).toEqual({ message: "Deleted" });
+    });
+  });
+  // end
+  
