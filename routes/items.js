@@ -14,4 +14,12 @@ router.post("/", function(req, res){
     res.status(201).json({ added: newItem})
 })
 
+router.get("/:name", function(req, res){
+    const foundItem = items.find(item => item.name === req.params.name)
+    if(foundItem === undefined){
+        throw new ExpressError("Item not found", 404)
+    }
+    res.json(foundItem)
+})
+
 module.exports = router;
