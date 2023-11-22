@@ -26,6 +26,7 @@ router.get("/:name", function(req, res){
     res.json(foundItem)
 })
 
+// 4. PATCH /items/:name
 router.patch("/:name", function(req, res){
     const foundItem = items.find(item => item.name === req.params.name)
     if (foundItem === undefined) {
@@ -34,6 +35,15 @@ router.patch("/:name", function(req, res){
     foundItem.name = req.body.name
     foundItem.price = req.body.price
     res.json({"updated": foundItem})
+})
+
+router.delete("/:name", function(req, res){
+    const foundItem = items.find(item => item.name === req.params.name)
+    if (foundItem === -1) {
+        throw new ExpressError("Item not found", 404)
+      }
+    items.splice(foundItem, 1)
+    res.json({"message": "Deleted"})
 })
 
 module.exports = router;
