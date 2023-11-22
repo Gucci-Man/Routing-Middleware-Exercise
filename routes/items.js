@@ -37,6 +37,7 @@ router.patch("/:name", function(req, res){
     res.json({updated: foundItem})
 })
 
+// 5. DELETE /items/:name 
 router.delete("/:name", function(req, res){
     const foundItem = items.find(item => item.name === req.params.name)
     if (foundItem === -1) {
