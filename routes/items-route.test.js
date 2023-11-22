@@ -65,3 +65,29 @@ describe("POST /items", function() {
     });
   });
   // end
+
+/** PATCH /items/[name] - update item */
+
+describe("PATCH /items/:name", function() {
+    test("Updates a single item", async function() {
+      const resp = await request(app)
+        .patch(`/items/${cheetos.name}`)
+        .send({
+          name: "HOT CHEETOS",
+          price: "$100"
+        });
+      expect(resp.statusCode).toBe(200);
+      expect(resp.body).toEqual({
+        updated: {
+            name: "HOT CHEETOS",
+            price: "$100"
+          }}
+      );
+    });
+  
+    test("Responds with 404 if id invalid", async function() {
+      const resp = await request(app).patch(`/items/0`);
+      expect(resp.statusCode).toBe(404);
+    });
+  });
+  // end

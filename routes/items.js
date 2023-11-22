@@ -34,7 +34,7 @@ router.patch("/:name", function(req, res){
       }
     foundItem.name = req.body.name
     foundItem.price = req.body.price
-    res.json({"updated": foundItem})
+    res.json({updated: foundItem})
 })
 
 router.delete("/:name", function(req, res){
@@ -43,7 +43,7 @@ router.delete("/:name", function(req, res){
         throw new ExpressError("Item not found", 404)
       }
     items.splice(foundItem, 1)
-    res.json({"message": "Deleted"})
+    res.json({message: "Deleted"})
 })
 
 module.exports = router;
